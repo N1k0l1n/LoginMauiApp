@@ -9,6 +9,7 @@ namespace LoginApp.Services
 {
      public interface ILoginRepository
     {
-        Task<UserInfo> Login(string username, string password);
+        Task<LoginResponse> Login(LoginRequest loginRequest);
+        //Task<UserInfo> Login(string username, string password);
     }
 }

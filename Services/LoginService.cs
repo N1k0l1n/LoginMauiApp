@@ -1,4 +1,5 @@
 ﻿using LoginApp.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace LoginApp.Services
 {
     public class LoginService : ILoginRepository
     {
-        public async Task<UserInfo> Login(string username, string password)
+        public async Task<LoginResponse> Login(LoginRequest loginRequest)
         {
             try
             {
@@ -18,14 +19,16 @@ namespace LoginApp.Services
                 {
                     var userInfo = new UserInfo();
                     var client = new HttpClient();
-                    string url = "https://wucmanager-dev.ikanbi.com/api/User/Authenticate/" + username + "/" + password;
-                    HttpResponseMessage responseMessage = await client.GetAsync("");
-                    if(responseMessage.IsSuccessStatusCode)
+                    string loginRequestStr = JsonConvert.SerializeObject(loginRequest);
+
+                    var response = await client.PostAsync("https://wucmanager-dev.ikanbi.com/api/User/Authenticate",
+                     new StringContent(loginRequestStr, Encoding.UTF8,
+                     "application/json"));
+
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        // string content = response.Content.ReadAsStringAsync().Results;
-                        //userIfo = JsonConvert.DeserializeObject<List<UserInfo>>(content);
-                        userInfo = await responseMessage.Content.ReadFromJsonAsync<UserInfo>();
-                        return await Task.FromResult(userInfo);
+                        var json = await response.Content.ReadAsStringAsync();
+                        return JsonConvert.DeserializeObject<LoginResponse>(json);
                     }
                     else
                     {

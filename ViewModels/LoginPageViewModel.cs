@@ -28,19 +28,30 @@ namespace LoginApp.ViewModels
         {
             if (!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password))
             {
-                UserInfo userInfo = await loginRepository.Login(UserName, Password);
+                var userInfo = await loginRepository.Login(new LoginRequest
+                {
+                    UserName = UserName,
+                    Password = Password
+                });
 
-                if(Preferences.ContainsKey(nameof(App.UserInfo)))
+
+                if (Preferences.ContainsKey(nameof(App.UserInfo)))
                 {
                     Preferences.Remove(nameof(App.UserInfo));  
                 }
-                string userDetails = JsonConvert.SerializeObject(userInfo);
+                await SecureStorage.SetAsync(nameof(App.Token), userInfo.Token);
+                string userDetails = JsonConvert.SerializeObject(userInfo.UserDetail);
                 Preferences.Set(nameof(App.UserInfo), userDetails);
-                App.UserInfo = userInfo;
+                App.UserInfo = userInfo.UserDetail;
+                App.Token = userInfo.Token;
 
                 AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
                 await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            }
+            else
+            {
+                await AppShell.Current.DisplayAlert("Invalid User Name Or Password", "Invalid UserName or Password", "OK");
             }
         }
     }
