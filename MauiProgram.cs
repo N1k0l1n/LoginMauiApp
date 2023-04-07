@@ -23,6 +23,7 @@ public static class MauiProgram
 
 
         builder.Services.AddSingleton<LoginPageViewModel>();
+        builder.Services.AddSingleton<AppShellViewModel>();
 
         return builder.Build();
 	}
