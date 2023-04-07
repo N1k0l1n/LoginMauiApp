@@ -4,11 +4,27 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:LoginApp"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:views="clr-namespace:LoginApp.Pages"
+    Shell.TabBarIsVisible="False"
+    >
 
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="MainPage" />
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Disabled"
+        Route="LoginPage" />
+
+    <FlyoutItem Route="HomePage" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Home" ContentTemplate="{DataTemplate views:HomePage}"/>
+        <ShellContent Title="Dashboard" ContentTemplate="{DataTemplate views:Dashboard}"/>
+        <ShellContent Title="About" ContentTemplate="{DataTemplate views:AboutPage}"/>
+    </FlyoutItem>
+
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button Text="Sign Out" Command="{Binding SignOutCommand}" BackgroundColor="#F96502"/>
+        </StackLayout>
+    </Shell.FlyoutFooter>
 
 </Shell>
