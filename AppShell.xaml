@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:LoginApp"
     xmlns:views="clr-namespace:LoginApp.Pages"
+    xmlns:models="clr-namespace:LoginApp.Models"
     Shell.TabBarIsVisible="False"
     >
 
@@ -16,9 +17,9 @@
         Route="LoginPage" />
 
     <FlyoutItem Route="HomePage" FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Home" ContentTemplate="{DataTemplate views:HomePage}"/>
-        <ShellContent Title="Dashboard" ContentTemplate="{DataTemplate views:Dashboard}"/>
-        <ShellContent Title="About" ContentTemplate="{DataTemplate views:AboutPage}"/>
+        <ShellContent Title="Home" Icon="{x:Static Member=models:Icons.Home}" ContentTemplate="{DataTemplate views:HomePage}"/>
+        <ShellContent Title="Dashboard" Icon="{x:Static Member=models:Icons.Dashboard}" ContentTemplate="{DataTemplate views:Dashboard}"/>
+        <ShellContent Title="About" Icon="{x:StaticExtension Member=models:Icons.AboutUs}" ContentTemplate="{DataTemplate views:AboutPage}"/>
     </FlyoutItem>
 
     <Shell.FlyoutFooter>

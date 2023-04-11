@@ -3,10 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LoginApp.Pages.AboutPage"
              Title="AboutPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout
+        Spacing="25"
+        Padding="10,100">
+        
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="We firmly believe that a satisfied customer is your best ambassador."  TextColor="#F96502" FontAttributes="Bold" FontSize="Large"/>
+                    <Span Text="
+                          
+                          
+                          "/>
+                    <Span Text="iKanbi is a Contact Center specialized in advising, developing and managing the remote customer services of any brand.
+                          
+                          
+                          
+                          Creative operational, technological and digital solutions are developed to offer you a customised and people-oriented customer service."
+                          FontAutoScalingEnabled="True"
+                          />
+                    <Span Text="
+                          
+                          
+                          "/>
+
+                    <Span Text="This is why we are much more than a traditional Call center."/>
+                    <Span Text="We put your customers at the heart of everything we do, we anticipate their needs and give them constant access to your world, your products and your services.
+                          
+                          We consider your brand in all its complexity, whatever the channel and the moment of interaction, to ensure your customers’ satisfaction."/>
+                    <Span Text="
+                          
+                          
+                          "/>
+                    <Span Text="Alternatively, click " />
+                    <Span Text="here"
+                  TextColor="Blue"
+                  TextDecorations="Underline">
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TapCommand}"
+                                          CommandParameter="https://ikanbi.com/en/about-ikanbi/" />
+                        </Span.GestureRecognizers>
+                    </Span>
+                    <Span Text=" to view more." />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
     </VerticalStackLayout>
 </ContentPage>
