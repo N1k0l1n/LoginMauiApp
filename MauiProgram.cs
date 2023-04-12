@@ -1,5 +1,7 @@
 ﻿using LoginApp.Pages;
+using LoginApp.Services;
 using LoginApp.ViewModels;
+using Syncfusion.Maui.Core.Hosting;
 
 namespace LoginApp;
 
@@ -10,6 +12,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.ConfigureSyncfusionCore()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -23,7 +26,8 @@ public static class MauiProgram
 
 
         builder.Services.AddSingleton<LoginPageViewModel>();
-
+        builder.Services.AddSingleton<CallStatsViewModel>();
+     
         return builder.Build();
 	}
 }

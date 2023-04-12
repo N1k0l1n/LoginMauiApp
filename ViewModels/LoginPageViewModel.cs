@@ -34,6 +34,7 @@ namespace LoginApp.ViewModels
                     Password = Password
                 });
 
+                CallStatsDataService.Instance.token = userInfo.Token;
 
                 if (Preferences.ContainsKey(nameof(App.UserInfo)))
                 {
